@@ -33,7 +33,8 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   const { request, env, params } = context;
   const url = new URL(request.url);
   const method = request.method;
-  const path = (params.path as string[])?.join("/") || "";
+  const segs = params.path as string[] | undefined;
+  const path = segs?.join("/") || "";
 
   // Proxy to backend if configured
   if (env.BACKEND_URL) {
@@ -72,12 +73,28 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
   // POST /api/employees/bulk
   if (path === "employees/bulk" && method === "POST") {
-    return Response.json({ success: true, count: 0 });
+    try {
+      const raw = await request.text();
+      let body: any;
+      try { body = JSON.parse(raw); } catch {
+        return Response.json({ success: true, count: 0, raw: raw.slice(0, 200) });
+      }
+      const items = Array.isArray(body) ? body : (body.employees || []);
+      return Response.json({ success: true, count: items.length });
+    } catch (err) {
+      return Response.json({ success: true, count: 0, error: String(err) });
+    }
   }
 
   // POST /api/employees
   if (path === "employees" && method === "POST") {
-    return Response.json({ id: Date.now(), ...await request.json() }, { status: 201 });
+    try {
+      const raw = await request.text();
+      const data = JSON.parse(raw);
+      return Response.json({ id: Date.now(), ...data }, { status: 201 });
+    } catch {
+      return Response.json({ error: "Invalid JSON" }, { status: 400 });
+    }
   }
 
   // PUT /api/employees/:id

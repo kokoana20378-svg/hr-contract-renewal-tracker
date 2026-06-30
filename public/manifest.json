@@ -3,12 +3,13 @@
   "short_name": "تتبع العقود",
   "description": "نظام تتبع وإدارة تجديد عقود الموظفين",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
   "lang": "ar",
   "dir": "rtl",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "categories": ["business", "productivity", "hr"],
   "icons": [
     {
