@@ -107,6 +107,7 @@ export default function App() {
   const [serverUrl, setServerUrl] = useState(getApiServer());
   const [serverConnected, setServerConnected] = useState<boolean | null>(null);
   const [isOffline, setIsOffline] = useState(!isOnline());
+  const [canInstall, setCanInstall] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const replaceFileInputRef = useRef<HTMLInputElement>(null);
 
@@ -118,7 +119,10 @@ export default function App() {
     }
     const off1 = onOnline(() => setIsOffline(false));
     const off2 = onOffline(() => setIsOffline(true));
-    return () => { off1(); off2(); };
+    const checkInstall = setInterval(() => {
+      setCanInstall(!!(window as any).__canInstallPWA?.());
+    }, 1000);
+    return () => { off1(); off2(); clearInterval(checkInstall); };
   }, []);
 
   const testConnection = useCallback(async () => {
@@ -379,7 +383,15 @@ export default function App() {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">تتبع تجديد عقود الموظفين</h1>
-        <div className="flex gap-3">
+        <div className="flex gap-3 items-center">
+          {canInstall && (
+            <button
+              onClick={() => (window as any).__installPWA?.()}
+              className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 text-sm animate-pulse"
+            >
+              📲 تثبيت التطبيق
+            </button>
+          )}
           <button
             onClick={sendMonthlyReport}
             disabled={sendingReport}
