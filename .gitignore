@@ -1,0 +1,23 @@
+node_modules/
+dist/
+.env
+.env.local
+*.db
+*.db-wal
+*.db-shm
+.DS_Store
+*.log
+.cache/
+*.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+docker-data/
+
+# Prisma
+backend/prisma/migrations/

@@ -1,0 +1,22 @@
+{
+  "appId": "com.hr.contracttracker",
+  "appName": "تتبع العقود",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true,
+    "hostname": "hr-contract-tracker.pages.dev"
+  },
+  "android": {
+    "allowMixedContent": true
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#2563eb"
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  }
+}

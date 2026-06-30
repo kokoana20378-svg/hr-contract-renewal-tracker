@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">تتبع العقود</string>
+    <string name="title_activity_main">تتبع العقود</string>
+    <string name="package_name">com.hr.contracttracker</string>
+    <string name="custom_url_scheme">com.hr.contracttracker</string>
+</resources>

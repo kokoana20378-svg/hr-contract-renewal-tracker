@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="32" fill="#2563eb"/>
+  <g transform="translate(96,96)" fill="white" text-anchor="middle" font-family="Arial">
+    <rect x="-40" y="-40" width="80" height="80" rx="8" fill="white" opacity="0.2"/>
+    <text y="-12" font-size="40" font-weight="bold">HR</text>
+    <text y="28" font-size="16">📋</text>
+  </g>
+</svg>
